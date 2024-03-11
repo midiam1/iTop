@@ -52,3 +52,9 @@
     sudo apt -y install --install-recommends webmin
     echo ' Una vez instalado webmin se debe abrir el puerto 10000 para que acepte las conexiones . '
     sleep 3
+
+## Instalación de Apache
+    echo "Instalación de Apache y php 7.4"
+    sleep 3
+    sudo apt -y install apache2
+    sudo apt -y install libapache2-mod-php7.4 
