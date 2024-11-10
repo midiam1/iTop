@@ -8,7 +8,7 @@
 
   echo " Guión creado por Proyectos Himmeros"
   echo " proceso de instalación y configuración de iTop "
-  echo " se va a actualizar Linux y a instalar net-tools + mc + Webmin "
+  echo " se va a actualizar Linux y a instalar mc + Webmin "
   sleep 3
 
 # -------------------------------------------------------------------- #
@@ -43,8 +43,6 @@
 
     sudo apt-get -y install --install-recommends webmin
 
-
-
 # Comienza la magia de la instalación de iTop
 
     sudo apt-get -y update
@@ -52,13 +50,17 @@
     sudo apt -y install curl wget dnf acl php-xml apache2 mariadb-server
     sudo apt -y install php php-mysql php-ldap php-cli php-soap php-json graphviz
     sudo apt -y install php-xml php-gd php-zip libapache2-mod-php php-mbstring php-curl php-imap php-apcu
-   
+
+# Descargo iTop   
+
     wget https://sourceforge.net/projects/itop/files/latest/download -O /tmp/itop.zip
+
     sudo unzip /tmp/itop.zip "web/*" -d /var/www/html/itop
     sudo mv /var/www/html/itop/web/*  /var/www/html/itop
     sudo rmdir /var/www/html/itop/web
 
     sudo setfacl -dR -m u:"www-data":rwX /var/www/html/itop/data /var/www/html/itop/log
     sudo setfacl -R -m u:"www-data":rwX /var/www/html/itop/data /var/www/html/itop/log
-    sudo mkdir /var/www/html/itop/conf /var/www/html/itop/env-production /var/www/html/itop/env-production-build
-    sudo chown www-data: /var/www/html/itop/conf /var/www/html/itop/env-production /var/www/html/itop/env-production-build
+    sudo setfacl -m u:"www-data":rwX /var/www/html/itop/
+    sudo mkdir /var/www/html/itop/env-production /var/www/html/itop/env-production-build /var/www/html/itop/env-test /var/www/html/itop/env-test-build
+    sudo chown www-data: /var/www/html/itop/conf /var/www/html/itop/env-production /var/www/html/itop/env-production-build /var/www/html/itop/env-test /var/www/html/itop/env-test-build
