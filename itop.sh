@@ -76,14 +76,16 @@
     USER_NAME="usuario_db"
     PASSWORD="clave_usuario"
 
+    su
+
 # Crear la base de datos
     mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
 
 # Crear el usuario y otorgar privilegios
-    sudo mysql -u root -p -e "CREATE USER IF NOT EXISTS '$USER_NAME'@'localhost' IDENTIFIED BY '$PASSWORD';"
-    sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$USER_NAME'@'localhost';"
+    mysql -u root -p -e "CREATE USER IF NOT EXISTS '$USER_NAME'@'localhost' IDENTIFIED BY '$PASSWORD';"
+    mysql -u root -p -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$USER_NAME'@'localhost';"
 
 # Aplicar los cambios
-    sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
+    mysql -u root -p -e "FLUSH PRIVILEGES;"
 
 echo "Base de datos y usuario creados con éxito."
