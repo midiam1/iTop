@@ -67,7 +67,7 @@
 
 # Modifico una configuración en Apache -> AllowOverride
     cd /etc/apache2
-    sudo sed -i 's/AllowOverride None/AllowOverride All/g' apache.conf
+    sudo sed -i 's/AllowOverride None/AllowOverride All/g' apache2.conf
     cd $HOME
 
 # Reinicio apache
