@@ -72,16 +72,17 @@
 # Base de datos
 
 # Variables
-    DB_NAME="titanio"
+    DB_NAME="titanio_itop"
     USER_NAME="usuario_db"
     PASSWORD="clave_usuario"
 
 # Crear la base de datos
-    sudo mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
+    echo "creando usuario y base de datos"
+    sudo mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS $DB_NAME; CREATE USER IF NOT EXISTS '$USER_NAME'@'localhost' IDENTIFIED BY '$PASSWORD'; GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$USER_NAME'@'localhost';"
 
 # Crear el usuario y otorgar privilegios
-    sudo mysql -u root -p -e "CREATE USER IF NOT EXISTS '$USER_NAME'@'localhost' IDENTIFIED BY '$PASSWORD';"
-    sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$USER_NAME'@'localhost';"
+    # sudo mysql -u root -p -e "CREATE USER IF NOT EXISTS '$USER_NAME'@'localhost' IDENTIFIED BY '$PASSWORD';"
+    # sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$USER_NAME'@'localhost';"
 
 # Aplicar los cambios
     sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
