@@ -65,6 +65,11 @@
     sudo mkdir /var/www/html/itop/env-production /var/www/html/itop/env-production-build /var/www/html/itop/env-test /var/www/html/itop/env-test-build
     sudo chown www-data: /var/www/html/itop/conf /var/www/html/itop/env-production /var/www/html/itop/env-production-build /var/www/html/itop/env-test /var/www/html/itop/env-test-build
 
+# Modifico una configuración en Apache -> AllowOverride
+    cd /etc/apache2
+    sudo sed -i 's/AllowOverride None/AllowOverride All/g' apache.conf
+    cd $HOME
+
 # Reinicio apache
     clear
     sudo /etc/init.d/apache2 reload    
@@ -77,7 +82,7 @@
     PASSWORD="clave_usuario"
 
 # Crear la base de datos
-    echo "creando usuario y base de datos"
+    echo "Creando usuario y base de datos"
     sudo mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;
     CREATE USER IF NOT EXISTS '$USER_NAME'@'localhost' IDENTIFIED BY '$PASSWORD';
     GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$USER_NAME'@'localhost'; FLUSH PRIVILEGES; "
