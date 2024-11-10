@@ -6,7 +6,7 @@
 
 # Créditos, si los borras, te buscaré y te nalguearé
 
-  echo " Guión creado por Proyectos Himmeros para Ra+"
+  echo " Guión creado por Proyectos Himmeros"
   echo " proceso de instalación y configuración de iTop "
   echo " se va a actualizar Linux y a instalar net-tools + mc + Webmin "
   sleep 3
@@ -15,7 +15,7 @@
 
 ## Pongo el prompt bonito ::
 
-    echo 'export PS1="\[\e[34m\]\u\[\e[m\]@\[\e[31m\]\h\[\e[m\]:\[\e[32m\]\w\[\e[m\] "' >> $HOME/.profile
+    echo export "PS1='\[\e[34m\]\u\[\e[m\]@\[\e[31m\]\h\[\e[m\]:\e[38;5;202m$(pwd):' " >> .bash_profile
 
 ## Corrigo la fecha ::
 
