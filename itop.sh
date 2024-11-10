@@ -66,7 +66,7 @@
     sudo chown www-data: /var/www/html/itop/conf /var/www/html/itop/env-production /var/www/html/itop/env-production-build /var/www/html/itop/env-test /var/www/html/itop/env-test-build
 
 # Reinicio apache
-
+    clear
     sudo /etc/init.d/apache2 reload    
 
 # Base de datos
@@ -78,13 +78,15 @@
 
 # Crear la base de datos
     echo "creando usuario y base de datos"
-    sudo mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS $DB_NAME; CREATE USER IF NOT EXISTS '$USER_NAME'@'localhost' IDENTIFIED BY '$PASSWORD'; GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$USER_NAME'@'localhost';"
+    sudo mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;
+    CREATE USER IF NOT EXISTS '$USER_NAME'@'localhost' IDENTIFIED BY '$PASSWORD';
+    GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$USER_NAME'@'localhost'; FLUSH PRIVILEGES; "
 
 # Crear el usuario y otorgar privilegios
     # sudo mysql -u root -p -e "CREATE USER IF NOT EXISTS '$USER_NAME'@'localhost' IDENTIFIED BY '$PASSWORD';"
     # sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$USER_NAME'@'localhost';"
 
 # Aplicar los cambios
-    sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
+    # sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
 
 echo "Base de datos y usuario creados con éxito."
