@@ -15,7 +15,7 @@
 
 ## Pongo el prompt bonito ::
 
-    echo export "PS1='\[\e[34m\]\u\[\e[m\]@\[\e[31m\]\h\[\e[m\]:\e[38;5;202m$(pwd):' " >> .bash_profile
+    echo export "PS1='\[\e[34m\]\u\[\e[m\]@\[\e[31m\]\h\[\e[m\]:\e[38;5;202m$(pwd):' " >> .bashrc
 
 ## Corrigo la fecha ::
 
@@ -64,3 +64,26 @@
     sudo setfacl -m u:"www-data":rwX /var/www/html/itop/
     sudo mkdir /var/www/html/itop/env-production /var/www/html/itop/env-production-build /var/www/html/itop/env-test /var/www/html/itop/env-test-build
     sudo chown www-data: /var/www/html/itop/conf /var/www/html/itop/env-production /var/www/html/itop/env-production-build /var/www/html/itop/env-test /var/www/html/itop/env-test-build
+
+# Reinicio apache
+
+    sudo /etc/init.d/apache2 reload    
+
+# Base de datos
+
+# Variables
+    DB_NAME="titanio"
+    USER_NAME="usuario_db"
+    PASSWORD="clave_usuario"
+
+# Crear la base de datos
+    mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
+
+# Crear el usuario y otorgar privilegios
+    sudo mysql -u root -p -e "CREATE USER IF NOT EXISTS '$USER_NAME'@'localhost' IDENTIFIED BY '$PASSWORD';"
+    sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$USER_NAME'@'localhost';"
+
+# Aplicar los cambios
+    sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
+
+echo "Base de datos y usuario creados con éxito."
