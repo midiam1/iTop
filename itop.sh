@@ -57,4 +57,20 @@
     echo "Instalación de Apache y php 7.4"
     sleep 3
     sudo apt -y install apache2
-    sudo apt -y install libapache2-mod-php7.4 
+    sudo apt -y install libapache2-mod-php7.4
+    sudo apt-get -y install php-curl
+
+# Comienza la magia de la instalación de iTop
+
+    sudo apt-get -y update
+    sudo apt-get -y install apache2 mariadb-server php7.4 php7.4-mysql php7.4-ldap php7.4-cli php7.4-soap php7.4-json graphviz php7.4-xml php7.4-gd php7.4-zip php7.4-fpm php7.4-mbstring acl
+    cd
+    wget https://sourceforge.net/projects/itop/files/latest/download -O /tmp/itop.zip
+    sudo unzip /tmp/itop.zip "web/*" -d /var/www/html/itop
+    sudo mv /var/www/html/itop/web/*  /var/www/html/itop
+    sudo rmdir /var/www/html/itop/web
+
+    sudo setfacl -dR -m u:"www-data":rwX /var/www/html/itop/data /var/www/html/itop/log
+    sudo setfacl -R -m u:"www-data":rwX /var/www/html/itop/data /var/www/html/itop/log
+    sudo mkdir /var/www/html/itop/conf /var/www/html/itop/env-production /var/www/html/itop/env-production-build
+    sudo chown www-data: /var/www/html/itop/conf /var/www/html/itop/env-production /var/www/html/itop/env-production-build
